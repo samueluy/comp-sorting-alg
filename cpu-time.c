@@ -1,4 +1,5 @@
 #define CPU_TIME  (1)
+#define MAX_SIZE 10000000
 
 #include <stdio.h>
 #include <time.h>
@@ -43,7 +44,7 @@ int bubbleMeasureMET(int array[], int size){
 		double elapsed = seconds + nanoseconds*1e-9;
 	    
 	    //printf("CPU Time measured: %lf in seconds.\n", elapsed);
-	    printf("CPU Time measured: %lf in miliseconds.\n", elapsed*1000);
+	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);
 	    
 	    return elapsed*1000;
 	}
@@ -71,7 +72,7 @@ int insertionMeasureMET(int array[], int size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
 	    return elapsed*1000;
 }
 
@@ -98,7 +99,7 @@ int selectionMeasureMET(int array[], int size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
 	    return elapsed*1000;
 }
 	
@@ -121,7 +122,7 @@ void arrayCopy(int source[], int target[], int size){
 int main () {
 	srand(time(NULL)); // set random seed for randomization
 	
-	int N1[100000], N2[100000], N3[100000];
+	int static N1[MAX_SIZE], N2[MAX_SIZE], N3[MAX_SIZE];
     int i, y, nSize;
     double bubble_time, insertion_time, selection_time;
 
@@ -146,9 +147,9 @@ int main () {
     		printf("\n");
 		}
 		printf("----------------------------------------------------------\n");
-		printf("Bubble = Average time: %lf miliseconds\n", bubble_time/10);
-		printf("Insertion = Average time: %lf miliseconds\n", insertion_time/10);
-		printf("Selection = Average time: %lf miliseconds\n", selection_time/10);
+		printf("Bubble = Average time: %.4lf miliseconds\n", bubble_time/10);
+		printf("Insertion = Average time: %.4lf miliseconds\n", insertion_time/10);
+		printf("Selection = Average time: %.4lf miliseconds\n", selection_time/10);
 		printf("----------------------------------------------------------\n");
 		bubble_time=0;
 		insertion_time=0;
