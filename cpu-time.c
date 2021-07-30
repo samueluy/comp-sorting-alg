@@ -14,7 +14,7 @@
 #include "GenerateArray.c"
 
 
-int bubbleMeasureMET(int array[], int size){
+int bubbleMeasureMET(int array[], int size, unsigned long *counter_value){
     // Start measuring time
     struct timespec begin, end; 
 	
@@ -30,7 +30,7 @@ int bubbleMeasureMET(int array[], int size){
 	#endif    
 	
 	    /* Call sorting function */
-		bubble_sort(array, size);
+		*counter_value = bubble_sort(array, size);
 	    
 	    // Stop measuring time and calculate the elapsed time
 	#if CPU_TIME 
@@ -48,12 +48,12 @@ int bubbleMeasureMET(int array[], int size){
 		double elapsed = seconds + nanoseconds*1e-9;
 	    
 	    //printf("CPU Time measured: %lf in seconds.\n", elapsed);
-	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);
+	    printf("CPU Time measured: %.4lf in miliseconds.\t\t\t Counter: %lu\n", elapsed*1000, *counter_value);
 	    
 	    return elapsed*1000;
 	}
     
-int insertionMeasureMET(int array[], int size){
+int insertionMeasureMET(int array[], int size, unsigned long *counter_value){
     struct timespec begin, end; 
 	
 	#if CPU_TIME
@@ -63,7 +63,7 @@ int insertionMeasureMET(int array[], int size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    
-		insertion_sort(array, size);
+		*counter_value = insertion_sort(array, size);
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
@@ -76,11 +76,11 @@ int insertionMeasureMET(int array[], int size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\t\t\t Counter: %lu\n", elapsed*1000, *counter_value);    
 	    return elapsed*1000;
 }
 
-int selectionMeasureMET(int array[], int size){
+int selectionMeasureMET(int array[], int size, unsigned long *counter_value){
     struct timespec begin, end; 
 	
 	#if CPU_TIME
@@ -90,7 +90,7 @@ int selectionMeasureMET(int array[], int size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    
-		selection_sort(array, size);
+		*counter_value = selection_sort(array, size);
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
@@ -103,13 +103,12 @@ int selectionMeasureMET(int array[], int size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\t\t\t Counter: %lu\n", elapsed*1000, *counter_value);    
 	    return elapsed*1000;
 }
 
-int mergeMeasureMET(int array[], long size){
+int mergeMeasureMET(int array[], long size, unsigned long *counter_value){
     struct timespec begin, end; 
-	
 ///	size = sizeof(array) / sizeof(array[0]);
 	#if CPU_TIME
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &begin);
@@ -118,7 +117,7 @@ int mergeMeasureMET(int array[], long size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    
-		merge_sort(array, 0, size - 1);
+		*counter_value = merge_sort(array, 0, size - 1);
 		
 
 	#if CPU_TIME 
@@ -132,11 +131,11 @@ int mergeMeasureMET(int array[], long size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\t\t\t Counter: %lu \n", elapsed*1000, *counter_value);    
 	    return elapsed*1000;
 }
 
-int shellMeasureMET(int array[], int size){
+int shellMeasureMET(int array[], int size, unsigned long *counter_value){
     struct timespec begin, end; 
 	
 	#if CPU_TIME
@@ -146,7 +145,7 @@ int shellMeasureMET(int array[], int size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    
-		shell_sort(array, size);
+		*counter_value = shell_sort(array, size);
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
@@ -159,11 +158,11 @@ int shellMeasureMET(int array[], int size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\t\t\t Counter: %lu\n", elapsed*1000, *counter_value);    
 	    return elapsed*1000;
 }
 
-int quickMeasureMET(int array[], long size){
+int quickMeasureMET(int array[], long size, unsigned long *counter_value){
     struct timespec begin, end; 
 	
 	#if CPU_TIME
@@ -173,7 +172,7 @@ int quickMeasureMET(int array[], long size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    	
-		quick_sort(array, 0, size - 1);
+		*counter_value = quick_sort(array, 0, size - 1);
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
@@ -186,7 +185,7 @@ int quickMeasureMET(int array[], long size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\t\t\t Counter: %lu\n", elapsed*1000, *counter_value);    
 	    return elapsed*1000;
 }
 
@@ -213,6 +212,7 @@ int main () {
     int i, y, nSize;
     double bubble_time, insertion_time, selection_time, merge_time, shell_time, quick_time;
     bubble_time = insertion_time = selection_time = merge_time =  shell_time =  quick_time = 0;
+    unsigned long bubble_counter, insertion_counter, selection_counter, merge_counter, shell_counter, quick_counter;
 
     for(i=0; i<6; i++){ // 6 different sizes of arrays
     	nSize = exponent(2, i+12); // set size of array
@@ -230,17 +230,17 @@ int main () {
     		
     		// Print results
     		printf("Bubble: ");
-    		bubble_time += bubbleMeasureMET(N1, nSize);
+    		bubble_time += bubbleMeasureMET(N1, nSize, &bubble_counter);
     		printf("Insertion: ");
-    		insertion_time += insertionMeasureMET(N2, nSize);
+    		insertion_time += insertionMeasureMET(N2, nSize, &insertion_counter);
     		printf("Selection: ");
-    		selection_time += selectionMeasureMET(N3, nSize);
+    		selection_time += selectionMeasureMET(N3, nSize, &selection_counter);
     		printf("Merge: ");
-    		merge_time += mergeMeasureMET(N4, nSize);
+    		merge_time += mergeMeasureMET(N4, nSize, &merge_counter);
     		printf("Shell: ");
-    		shell_time += shellMeasureMET(N5, nSize);
+    		shell_time += shellMeasureMET(N5, nSize, &shell_counter);
     		printf("Quick: ");
-    		quick_time += quickMeasureMET(N6, nSize);
+    		quick_time += quickMeasureMET(N6, nSize, &quick_counter);
     		printf("\n");
 		}
 		printf("----------------------------------------------------------\n");
@@ -251,12 +251,24 @@ int main () {
 		printf("Shell Sort = Average time: %.4lf miliseconds\n", shell_time/10);
 		printf("Quick Sort = Average time: %.4lf miliseconds\n", quick_time/10);
 		printf("----------------------------------------------------------\n");
+		printf("Bubble Sort = Average counter: %.4lu\n", bubble_counter/10);
+		printf("Insertion Sort = Average counter: %.4lu\n", insertion_counter/10);
+		printf("Selection Sort = Average counter: %.4lu\n", selection_counter/10);
+		printf("Merge Sort = Average counter: %.4lu\n", merge_counter/10);
+		printf("Shell Sort = Average counter: %.4lu\n", shell_counter/10);
+		printf("Quick Sort = Average counter: %.4lu\n", quick_counter/10);
 		bubble_time=0;
 		insertion_time=0;
 		selection_time=0;
 		merge_time=0;
 		shell_time=0;
 		quick_time=0;
+		bubble_counter=0;
+		insertion_counter=0;
+		selection_counter=0;
+		merge_counter=0;
+		shell_counter=0;
+		quick_counter=0;
     	printf("\nEND\n\n");
 	}
     

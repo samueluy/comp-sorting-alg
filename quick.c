@@ -5,15 +5,16 @@ Taken from: https://www.programiz.com/dsa/quick-sort
 #include <stdio.h>
 
 // function to swap elements
-void quickSwap(int *a, int *b) {
+void quickSwap(int *a, int *b, unsigned long *counter_value) {
+	counter_value++;
   int t = *a;
   *a = *b;
   *b = t;
 }
 
 // function to find the partition position
-int partition(int array[], int low, int high) {
-  
+int partition(int array[], int low, int high, unsigned long *counter_value) {
+  counter_value++;
   // select the rightmost element as pivot
   int pivot = array[high];
   
@@ -24,6 +25,7 @@ int partition(int array[], int low, int high) {
   // compare them with the pivot
   int j;
   for (j = low; j < high; j++) {
+  	counter_value++;
     if (array[j] <= pivot) {
         
       // if element smaller than pivot is found
@@ -31,30 +33,40 @@ int partition(int array[], int low, int high) {
       i++;
       
       // swap element at i with element at j
-      quickSwap(&array[i], &array[j]);
+      quickSwap(&array[i], &array[j], counter_value);
     }
   }
 
   // swap the pivot element with the greater element at i
-  quickSwap(&array[i + 1], &array[high]);
+  quickSwap(&array[i + 1], &array[high], counter_value);
   
   // return the partition point
   return (i + 1);
 }
 
-void quick_sort(int array[], int low, int high) {
+unsigned long quick_sort_driver(int array[], int low, int high) {
+	unsigned long counter_value;
+	counter_value++;
   if (low < high) {
     
     // find the pivot element such that
     // elements smaller than pivot are on left of pivot
     // elements greater than pivot are on right of pivot
-    int pi = partition(array, low, high);
+    int pi = partition(array, low, high, &counter_value);
     
     // recursive call on the left of pivot
-    quick_sort(array, low, pi - 1);
+    counter_value += quick_sort_driver(array, low, pi - 1);
     
     // recursive call on the right of pivot
-    quick_sort(array, pi + 1, high);
+    counter_value += quick_sort_driver(array, pi + 1, high);
   }
+  return counter_value;
+}
+
+unsigned long quick_sort(int array[], int low, int high){
+	unsigned long counter_value=0;
+	counter_value = quick_sort_driver(array, low, high);
+	
+	return counter_value;
 }
 
