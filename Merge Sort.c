@@ -1,3 +1,8 @@
+/* Quick sort in C
+Taken from: https://www.programiz.com/dsa/merge-sort
+
+*/
+
 #include <stdio.h>
 
 // Merge two subarrays L and M into arr

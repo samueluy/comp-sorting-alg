@@ -119,6 +119,7 @@ int mergeMeasureMET(int array[], long size){
 	
 	#endif    
 		mergeSort(array, 0, size - 1);
+		
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
@@ -131,7 +132,7 @@ int mergeMeasureMET(int array[], long size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
 	    return elapsed*1000;
 }
 
@@ -158,7 +159,7 @@ int shellMeasureMET(int array[], int size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
 	    return elapsed*1000;
 }
 
@@ -185,12 +186,10 @@ int quickMeasureMET(int array[], long size){
 	    long nanoseconds = end.tv_nsec - begin.tv_nsec;
 		double elapsed = seconds + nanoseconds*1e-9;
 		
-	    printf("CPU Time measured: %lf in miliseconds.\n", elapsed*1000);    
+	    printf("CPU Time measured: %.4lf in miliseconds.\n", elapsed*1000);    
 	    return elapsed*1000;
 }
 
-
-	
 int exponent(int base, int power){ // get value when raised to a power
 	int result=1;
     	while(power != 0){
@@ -210,7 +209,7 @@ void arrayCopy(int source[], int target[], int size){
 int main () {
 	srand(time(NULL)); // set random seed for randomization
 	
-	int static N1[MAX_SIZE], N2[MAX_SIZE], N3[MAX_SIZE];
+	int static N1[MAX_SIZE], N2[MAX_SIZE], N3[MAX_SIZE], N4[MAX_SIZE], N5[MAX_SIZE], N6[MAX_SIZE];
     int i, y, nSize;
     double bubble_time, insertion_time, selection_time, merge_time, shell_time, quick_time;
     bubble_time = insertion_time = selection_time = merge_time =  shell_time =  quick_time = 0;
@@ -225,6 +224,9 @@ int main () {
     		GenerateData(N1, nSize); // Generate base array
     		arrayCopy(N1, N2, nSize);
     		arrayCopy(N1, N3, nSize);
+    		arrayCopy(N1, N4, nSize);
+    		arrayCopy(N1, N5, nSize);
+    		arrayCopy(N1, N6, nSize);
     		
     		// Print results
     		printf("Bubble: ");
@@ -234,20 +236,20 @@ int main () {
     		printf("Selection: ");
     		selection_time += selectionMeasureMET(N3, nSize);
     		printf("Merge: ");
-    		merge_time += mergeMeasureMET(N3, nSize);
+    		merge_time += mergeMeasureMET(N4, nSize);
     		printf("Shell: ");
-    		shell_time += shellMeasureMET(N3, nSize);
+    		shell_time += shellMeasureMET(N5, nSize);
     		printf("Quick: ");
-    		quick_time += quickMeasureMET(N3, nSize);
+    		quick_time += quickMeasureMET(N6, nSize);
     		printf("\n");
 		}
 		printf("----------------------------------------------------------\n");
-		printf("Bubble Sort = Average time: %lf miliseconds\n", bubble_time/10);
-		printf("Insertion Sort = Average time: %lf miliseconds\n", insertion_time/10);
-		printf("Selection Sort = Average time: %lf miliseconds\n", selection_time/10);
-		printf("Merge Sort = Average time: %lf miliseconds\n", merge_time/10);
-		printf("Shell Sort = Average time: %lf miliseconds\n", shell_time/10);
-		printf("Quick Sort = Average time: %lf miliseconds\n", quick_time/10);
+		printf("Bubble Sort = Average time: %.4lf miliseconds\n", bubble_time/10);
+		printf("Insertion Sort = Average time: %.4lf miliseconds\n", insertion_time/10);
+		printf("Selection Sort = Average time: %.4lf miliseconds\n", selection_time/10);
+		printf("Merge Sort = Average time: %.4lf miliseconds\n", merge_time/10);
+		printf("Shell Sort = Average time: %.4lf miliseconds\n", shell_time/10);
+		printf("Quick Sort = Average time: %.4lf miliseconds\n", quick_time/10);
 		printf("----------------------------------------------------------\n");
 		bubble_time=0;
 		insertion_time=0;
