@@ -8,9 +8,9 @@
 #include "bubble.c"
 #include "insertion.c"
 #include "selection.c"
-#include "Merge Sort.c"
-#include "Shell Sort.c"
-#include "Quick Sort.c"
+#include "merge.c"
+#include "shell.c"
+#include "quick.c"
 #include "GenerateArray.c"
 
 
@@ -118,7 +118,7 @@ int mergeMeasureMET(int array[], long size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    
-		mergeSort(array, 0, size - 1);
+		merge_sort(array, 0, size - 1);
 		
 
 	#if CPU_TIME 
@@ -146,7 +146,7 @@ int shellMeasureMET(int array[], int size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    
-		shellSort(array, size);
+		shell_sort(array, size);
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
@@ -173,7 +173,7 @@ int quickMeasureMET(int array[], long size){
 	    clock_gettime(CLOCK_REALTIME, &begin);
 	
 	#endif    	
-		quickSort(array, 0, size - 1);
+		quick_sort(array, 0, size - 1);
 
 	#if CPU_TIME 
 	    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);   
