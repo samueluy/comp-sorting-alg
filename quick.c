@@ -1,72 +1,46 @@
 /* Quick sort in C
-Taken from: https://www.programiz.com/dsa/quick-sort
-
+Taken from: https://hackr.io/blog/quick-sort-in-c
 */
-#include <stdio.h>
 
-// function to swap elements
-void quickSwap(int *a, int *b, unsigned long *counter_value) {
+#include<stdio.h>
+unsigned long quick_sort(int array[],int first,int last)
+{
+	unsigned long counter_value = 0;
 	counter_value++;
-  int t = *a;
-  *a = *b;
-  *b = t;
-}
-
-// function to find the partition position
-int partition(int array[], int low, int high, unsigned long *counter_value) {
-  counter_value++;
-  // select the rightmost element as pivot
-  int pivot = array[high];
-  
-  // pointer for greater element
-  int i = (low - 1);
-
-  // traverse each element of the array
-  // compare them with the pivot
-  int j;
-  for (j = low; j < high; j++) {
-  	counter_value++;
-    if (array[j] <= pivot) {
-        
-      // if element smaller than pivot is found
-      // swap it with the greater element pointed by i
-      i++;
-      
-      // swap element at i with element at j
-      quickSwap(&array[i], &array[j], counter_value);
-    }
-  }
-
-  // swap the pivot element with the greater element at i
-  quickSwap(&array[i + 1], &array[high], counter_value);
-  
-  // return the partition point
-  return (i + 1);
-}
-
-unsigned long quick_sort_driver(int array[], int low, int high) {
-	unsigned long counter_value;
-	counter_value++;
-  if (low < high) {
-    
-    // find the pivot element such that
+	int i, j, pivot, temp;
+	if(first<last)	
+	{
+	// find the pivot element such that
     // elements smaller than pivot are on left of pivot
     // elements greater than pivot are on right of pivot
-    int pi = partition(array, low, high, &counter_value);
-    
-    // recursive call on the left of pivot
-    counter_value += quick_sort_driver(array, low, pi - 1);
-    
-    // recursive call on the right of pivot
-    counter_value += quick_sort_driver(array, pi + 1, high);
-  }
-  return counter_value;
-}
-
-unsigned long quick_sort(int array[], int low, int high){
-	unsigned long counter_value=0;
-	counter_value = quick_sort_driver(array, low, high);
-	
+		pivot = first;
+		i = first;
+		j = last;
+		while(i<j)
+		{
+			while(array[i]<=array[pivot]&&i<last)
+				i++;
+			while(array[j]>array[pivot])
+				j--;
+			if(i<j)
+			{
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+		}
+		temp = array[pivot];
+		array[pivot]=array[j];
+		array[j]=temp;
+		
+		//	Recursive call on the left and right side of the array.
+		counter_value+=quick_sort(array,first,j-1);
+		counter_value+=quick_sort(array,j+1,last);
+	}
 	return counter_value;
 }
+
+
+
+
 

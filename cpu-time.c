@@ -213,6 +213,7 @@ int main () {
     double bubble_time, insertion_time, selection_time, merge_time, shell_time, quick_time;
     bubble_time = insertion_time = selection_time = merge_time =  shell_time =  quick_time = 0;
     unsigned long bubble_counter, insertion_counter, selection_counter, merge_counter, shell_counter, quick_counter;
+	bubble_counter = insertion_counter =  selection_counter = merge_counter =  shell_counter = quick_counter = 0;
 
     for(i=0; i<6; i++){ // 6 different sizes of arrays
     	nSize = exponent(2, i+12); // set size of array
