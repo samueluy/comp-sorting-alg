@@ -214,6 +214,8 @@ int main () {
     bubble_time = insertion_time = selection_time = merge_time =  shell_time =  quick_time = 0;
     unsigned long bubble_counter, insertion_counter, selection_counter, merge_counter, shell_counter, quick_counter;
 	bubble_counter = insertion_counter =  selection_counter = merge_counter =  shell_counter = quick_counter = 0;
+	unsigned long bubble_counter_ave, insertion_counter_ave, selection_counter_ave, merge_counter_ave, shell_counter_ave, quick_counter_ave;
+	bubble_counter_ave = insertion_counter_ave =  selection_counter_ave = merge_counter_ave =  shell_counter_ave = quick_counter_ave = 0;
 
     for(i=0; i<6; i++){ // 6 different sizes of arrays
     	nSize = exponent(2, i+12); // set size of array
@@ -232,16 +234,22 @@ int main () {
     		// Print results
     		printf("Bubble: ");
     		bubble_time += bubbleMeasureMET(N1, nSize, &bubble_counter);
+    		bubble_counter_ave += bubble_counter;
     		printf("Insertion: ");
     		insertion_time += insertionMeasureMET(N2, nSize, &insertion_counter);
+    		insertion_counter_ave += insertion_counter;
     		printf("Selection: ");
     		selection_time += selectionMeasureMET(N3, nSize, &selection_counter);
+    		selection_counter_ave += selection_counter;
     		printf("Merge: ");
     		merge_time += mergeMeasureMET(N4, nSize, &merge_counter);
+    		merge_counter_ave += merge_counter;
     		printf("Shell: ");
     		shell_time += shellMeasureMET(N5, nSize, &shell_counter);
+    		shell_counter_ave += shell_counter;
     		printf("Quick: ");
     		quick_time += quickMeasureMET(N6, nSize, &quick_counter);
+    		quick_counter_ave += quick_counter;
     		printf("\n");
 		}
 		printf("----------------------------------------------------------\n");
@@ -252,24 +260,24 @@ int main () {
 		printf("Shell Sort = Average time: %.4lf miliseconds\n", shell_time/10);
 		printf("Quick Sort = Average time: %.4lf miliseconds\n", quick_time/10);
 		printf("----------------------------------------------------------\n");
-		printf("Bubble Sort = Average counter: %.4lu\n", bubble_counter/10);
-		printf("Insertion Sort = Average counter: %.4lu\n", insertion_counter/10);
-		printf("Selection Sort = Average counter: %.4lu\n", selection_counter/10);
-		printf("Merge Sort = Average counter: %.4lu\n", merge_counter/10);
-		printf("Shell Sort = Average counter: %.4lu\n", shell_counter/10);
-		printf("Quick Sort = Average counter: %.4lu\n", quick_counter/10);
+		printf("Bubble Sort = Average counter: %.4lu\n", bubble_counter_ave/10);
+		printf("Insertion Sort = Average counter: %.4lu\n", insertion_counter_ave/10);
+		printf("Selection Sort = Average counter: %.4lu\n", selection_counter_ave/10);
+		printf("Merge Sort = Average counter: %.4lu\n", merge_counter_ave/10);
+		printf("Shell Sort = Average counter: %.4lu\n", shell_counter_ave/10);
+		printf("Quick Sort = Average counter: %.4lu\n", quick_counter_ave/10);
 		bubble_time=0;
 		insertion_time=0;
 		selection_time=0;
 		merge_time=0;
 		shell_time=0;
 		quick_time=0;
-		bubble_counter=0;
-		insertion_counter=0;
-		selection_counter=0;
-		merge_counter=0;
-		shell_counter=0;
-		quick_counter=0;
+		bubble_counter_ave=0;
+		insertion_counter_ave=0;
+		selection_counter_ave=0;
+		merge_counter_ave=0;
+		shell_counter_ave=0;
+		quick_counter_ave=0;
     	printf("\nEND\n\n");
 	}
     
