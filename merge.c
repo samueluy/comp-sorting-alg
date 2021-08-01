@@ -6,8 +6,8 @@ Taken from: https://www.programiz.com/dsa/merge-sort
 #include <stdio.h>
 
 // Merge two subarrays L and M into arr
-void merge(int arr[], int p, int q, int r, unsigned long *counter_value) {
-
+unsigned long merge(int arr[], int p, int q, int r) {
+	unsigned long counter_value=0;
   // Create L ? A[p..q] and M ? A[q+1..r]
   int n1 = q - p + 1;
   int n2 = r - q;
@@ -57,11 +57,12 @@ void merge(int arr[], int p, int q, int r, unsigned long *counter_value) {
     j++;
     k++;
   }
+  return counter_value;
 }
 
 // Divide the array into two subarrays, sort them and merge them
 unsigned long merge_sort_driver(int arr[], long l, long r) {
-	unsigned long counter_value;
+	unsigned long counter_value=0;
 	counter_value++;
   if (l < r) {
 
@@ -72,7 +73,7 @@ unsigned long merge_sort_driver(int arr[], long l, long r) {
     counter_value += merge_sort_driver(arr, m + 1, r);
 
     // Merge the sorted subarrays
-    merge(arr, l, m, r, &counter_value);
+    counter_value += merge(arr, l, m, r);
   }
   return counter_value++;
 }
@@ -81,6 +82,5 @@ unsigned long merge_sort(int arr[], long l, long r){
 	unsigned long counter_value = merge_sort_driver(arr, l, r);
 	return counter_value;
 }
-
 
 
