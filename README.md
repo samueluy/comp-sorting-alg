@@ -32,7 +32,3 @@ The following table provides the average machine execution time (in milliseconds
 | 32798 | 712.2000 | 1174.6000 | 7.5000 | 13.5000 | 4.5000 |
 | 65536 | 2946.5000 | 4829.4000 | 9.0000 | 43.1000 | 10.5000 |
 | 131072 | 11695.0000 | 18977.8000 | 19.8000 | 112.0000 | 24.6000 |
-
-## Graphs
-
-Include any graphs or visual representations of the data here.
